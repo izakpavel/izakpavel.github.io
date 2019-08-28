@@ -6,12 +6,8 @@ permalink: /about/
 
 <img src="{{ site.baseurl }}/assets/profile-placeholder.gif" title="Profile Picture" class="profile">
 
-Centrarium is a custom theme for Jekyll, made by [Ben Centra][bencentra] for his own blog. He'd be humbled if you liked it enough to use it as well! Installation and configuration instructions can be found in the [GitHub repository](https://github.com/bencentra/centrarium).
+I am PhD dropout who was seduced by mobile apps developmant and back in 2011 co-founded Trinerdis — a mobile apps development company. After several years of building client apps, in 2016 myself and my team have joined Kiwi.com and as a Chief of Mobile Product I took care of Kiwi.com mobile apps during its boom from zero to 600k monthly active users
 
-This page is a good place to write about yourself, your project, your product, or whatever it is your site is for. You can replace the image above, or you can get rid of it entirely. 
+In summer 2019 I have stepped down from my position at Kiwi.com and started to focus on personal projects.
 
-You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/). And you can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
-
-[centrarium]: https://github.com/bencentra/centrarium
-[bencentra]: http://bencentra.com
-[jekyll]: https://github.com/jekyll/jekyll
+My major current project is a game written entirely in SwiftUI which brings lot of obstacles and as a result gained knowledge. This is actually the reason why this blog is alive.
