@@ -157,6 +157,8 @@ And if you want to create eye candy animation that is applicable not just on but
 
 So what about a like button?
 
+![likeButton]
+
 {% highlight swift %}
 struct LikeEffect: GeometryEffect {
 
@@ -210,13 +212,78 @@ struct LikeButtonView: View {
 }
 {% endhighlight %}
 
-![likeButton]
 
 As you can see it is just reusing of the priciples from our demo. It demonstrates the distinct effect of ButtonStyle that is changing button appearance on tap and animation being done after the tap is triggered. Notice that no animation is performed when the tap is cancelled which is yet another benefit,
 
 ### Additional transformation during animation###
 
-Into this category our first example fits, but lets have a look on something different.
+Into this category our first example fits, but lets have a look on something different. 
+
+What about some fancy menu? Here we will demonstrate how well you can combine effect of standard modifiers with GeometryEffect. Lets have a look at the result and the code below.
+
+![jumpyMenu]
+
+{% highlight swift %}
+struct JumpyEffect: GeometryEffect {
+
+    var offsetValue: Double // 0...1
+    
+    var animatableData: Double {
+        get { offsetValue }
+        set { offsetValue = newValue }
+    }
+    
+    func effectValue(size: CGSize) -> ProjectionTransform {
+        let reducedValue = offsetValue - floor(offsetValue)
+        let value = 1.0-(cos(2*reducedValue*Double.pi)+1)/2
+
+        let translation   = CGFloat(-50*value)
+        
+        let affineTransform = CGAffineTransform(translationX: translation, y: 0)
+        
+        return ProjectionTransform(affineTransform)
+    }
+}
+
+struct JumpyMenuView: View {
+    @State var selectedOption : Int = 0
+    @State var menuOffset : Double = 0
+    
+    let itemHeight: CGFloat = 40
+    
+    var body: some View {
+        HStack (alignment: .top){
+            Circle()
+                .fill(Color.orange)
+                .frame(width:10, height:10)
+                .offset(x: 20, y: (CGFloat(self.selectedOption) * self.itemHeight + 15.0) )
+                .modifier(JumpyEffect(offsetValue: self.menuOffset))
+            VStack (alignment: .leading, spacing: 0){
+                ForEach(0..<6) { index in
+                    Button(action:{
+                        withAnimation(.spring()) {
+                            self.selectedOption = index
+                            self.menuOffset += 1
+                        }
+                    }) {
+                        HStack {
+                            Image(systemName: "\(index).circle")
+                            Text("Jumpy Menu Item")
+                        }
+                    }
+                    .frame(height: self.itemHeight)
+                    .rotation3DEffect(Angle(degrees: self.selectedOption == index ? -30 : 5), axis: (x: 0, y: 1, z: 0))
+                }
+            }
+        }
+    }
+}
+{% endhighlight %}
+
+Here the `JumpyEffect` implementation is even simpler than before - we are just altering `x` coordinate of the orange circle. Notice that the `y` coordinate is controlled by standard `.offset` modifier and only the jumpy part is handled by the GeometryEffect. 
+Such combinations in multiple axis allows us to **break animation into smaller pieces** than writing complex paths.
+
+That is all for today, you can find all codes at this [github repo]
 
 
 *Did you like this article?*
@@ -225,14 +292,17 @@ Into this category our first example fits, but lets have a look on something dif
 
 
 
-[GeometryEffectt]: https://developer.apple.com/documentation/swiftui/geometryeffect
+[GeometryEffect]: https://developer.apple.com/documentation/swiftui/geometryeffect
 [SwiftUI]: https://developer.apple.com/documentation/swiftui
 [tutorials]: https://developer.apple.com/tutorials/swiftui/creating-and-combining-views
 [rotationEffect]:https://developer.apple.com/documentation/swiftui/view/3278649-rotationeffect
 [ProjectionTransform]: https://developer.apple.com/documentation/swiftui/projectiontransform
 [ButtonStyle]: https://developer.apple.com/documentation/swiftui/buttonstyle
+[Swift Talk #166]: https://talk.objc.io/episodes/S01E166-geometry-effects
+[github repo]: https://github.com/izakpavel/GeometryEffectAnimations
 
 [sliderImage]: /assets/posts/sliderImage.gif "Moving slider"
 [sliderButtons]: /assets/posts/sliderButtons.gif "Controlling position with buttons"
 [rotationEffect]: /assets/posts/rotationEffect.gif "GeometryEffect animates view properly"
 [likeButton]: /assets/posts/likeButton.gif "LikeButton with onTap animation"
+[jumpyMenu]: /assets/posts/jumpyMenu.gif "Special menu that combines various modifiers and GeometryEffect"
