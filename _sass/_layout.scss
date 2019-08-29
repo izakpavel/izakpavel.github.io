@@ -251,7 +251,8 @@ pre code.hljs {
 	img {
 		display: block;
 		margin: auto;
-		width: 90%;
+		max-width: 90%;
+		border: 1px solid $light-gray;
 	}
 	/*
 	*	Posts
