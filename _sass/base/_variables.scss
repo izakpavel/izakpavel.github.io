@@ -3,7 +3,7 @@
 
 // Typography
 $base-font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif; // $helvetica;
-$heading-font-family: "Roboto Slab", "Helvetica Neue", "Helvetica", "Arial", sans-serif; // $base-font-family;
+$heading-font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif; // $base-font-family;
 
 // Font Sizes
 $base-font-size: $em-base; // 16px
@@ -22,13 +22,13 @@ $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
 
 // Colors
-$dark-gray: #333;
+$dark-gray: #2d3436;
 $medium-gray: #999;
-$light-gray: #ddd;
+$light-gray: #dfe6e9;
 $white: #fff;
 // Flat UI Colors. For more, see http://flatuicolors.com/
-$turquoise: #1abc9c;	// Turqoise
-$green: #27ae60;	  	// Nephritis
+$turquoise: #30336b;	// Turqoise
+$green: #00b894;	  	// Nephritis
 $blue: #2980b9;				// Belize Hole
 $purple: #8e44ad;			// Wisteria
 $orange: #d35400;			// Pumpkin
@@ -40,8 +40,8 @@ $bc-red: #bc0000;
 // Font Colors
 $base-background-color: #fff;
 $base-font-color: $dark-gray;
-$action-color: $blue;
-$highlight-color: tint($action-color, 33%);
+$action-color: $green;
+$highlight-color: $dark-gray;
 
 // Border
 $base-border-color: $light-gray;
