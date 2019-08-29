@@ -5,7 +5,7 @@ date: 2019-08-28
 author: Pavel Zak
 categories: personal
 tags:	
-cover:  "/assets/instacode.png"
+cover:  "/assets/header_image.jpg"
 ---
 
 The time has come for me to start a blog. 
