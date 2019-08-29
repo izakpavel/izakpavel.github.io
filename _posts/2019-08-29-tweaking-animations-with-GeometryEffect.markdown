@@ -16,7 +16,7 @@ Lets build a sample project to demonstrate it.
 
 *Since the SwiftUI is still in beta all code provided below was working in XCode 11 beta 6*
 
-## Setup ##
+## Setup
 
 Lets create simple View with a image and slider. And lets assume we want the image to be rotated based on slider position. This is easy job to do and can be done like this using [rotationEffect].
 
@@ -105,7 +105,7 @@ Sadly, soon we realize that this is dead-end
 
 We need somethin else...
 
-## GeometryEffect comes to the scene##
+## GeometryEffect comes to the scene
 
 As you definitively guessed, the situation will be different using GeometryEffect. GeometryEffect is another modifier, but it behaves differently while animation interpolates. Its main method `func effectValue(size: CGSize) -> ProjectionTransform` is called **continuously during interpolation** of its `offsetValue` property. 
 
@@ -139,7 +139,7 @@ The return value of `effectValue` method is a [ProjectionTransform] struct which
 
 You can see in the example that even though our effect aims on the rotation, we had to introduce 2 translations. That is because the rotation is being done around point *(0,0)* (top-left corner) so first we shift center of the view to that point, rotate it and move back to previous position. 
 
-## Better use-cases ##
+## Better use-cases 
 
 OK, but what is all of this good for?
 
@@ -149,7 +149,7 @@ I am using geometry effect as a addition to standard modifiers mainly in these c
 
 I will share examples:
 
-### Button triggered animation###
+### Button triggered animation
 
 This is actually the case how I got on the track of GeometryEffect. I wanted the button to perform scale operation when tapped. As you probably know, there is [ButtonStyle] protocol to alter appearance of the button that is usable in such cases (and it animates) but I wanted the animation to happen **after** the tap not depending on the tap duration.
 
@@ -215,7 +215,7 @@ struct LikeButtonView: View {
 
 As you can see it is just reusing of the priciples from our demo. It demonstrates the distinct effect of ButtonStyle that is changing button appearance on tap and animation being done after the tap is triggered. Notice that no animation is performed when the tap is cancelled which is yet another benefit,
 
-### Additional transformation during animation###
+### Additional transformation during animation
 
 Into this category our first example fits, but lets have a look on something different. 
 
