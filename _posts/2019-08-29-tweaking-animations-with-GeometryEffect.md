@@ -6,6 +6,7 @@ author: Pavel Zak
 categories: development
 tags:	swiftUI geometryEffect animation
 cover:  "/assets/instacode.png"
+published: false
 ---
 
 TODO write this post
