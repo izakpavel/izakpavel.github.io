@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Tweaking animations with GeometryEffect"
+title: "Tweaking SwiftUI animations with GeometryEffect"
 date: 2019-08-29
 author: Pavel Zak
 categories: development
-tags:	swiftUI geometryEffect animation
-cover:  "/assets/header_image.jpg"
+tags:	swiftUI geometryEffect animation iosDev
+cover:  "/assets/posts/geometryEffectCover.jpg"
 ---
 
 In this article I will talk about [GeometryEffect] and some techniques how this modifier can be used to spice up  animations in your [SwiftUI] apps. If you are new to SwiftUI, i recommend you to go through set of [tutorials] provided by Apple that serve as a great kickstart reference. 
