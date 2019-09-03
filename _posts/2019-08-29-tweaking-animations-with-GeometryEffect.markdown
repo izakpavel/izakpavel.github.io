@@ -133,11 +133,41 @@ struct CustomRotationEffect: GeometryEffect {
 }
 {% endhighlight %}
 
-The return value of `effectValue` method is a [ProjectionTransform] struct which is basically 3x3 transformation matrix supporting affine transformations (like scale, translation, rotation) that is applied on the view in visual space.
+The return value of `effectValue` method is a [ProjectionTransform] struct which is basically 3x3 transformation matrix various transformations (like scale, translation, rotation) that is applied on the view in visual space.
 
 ![rotationEffect]
 
 You can see in the example that even though our effect aims on the rotation, we had to introduce 2 translations. That is because the rotation is being done around point *(0,0)* (top-left corner) so first we shift center of the view to that point, rotate it and move back to previous position. 
+
+*Update 3rd of September 2019*
+
+Since [ProjectionTransform] supports initialization from [CATtransform3D] structure, it is possible to introduce full 3D transformations of the view. 
+
+In the example below the rotation along y axis is introduced. Note setting of `m34` element that sets the perspective parameter of the projection transformation. Without that the projection of the view is orthographic.
+
+{% highlight swift %}
+struct CustomRotationEffect3D: GeometryEffect {
+
+    var offsetValue: Double // 0...1
+    
+    var animatableData: Double {
+        get { offsetValue }
+        set { offsetValue = newValue }
+    }
+    
+    func effectValue(size: CGSize) -> ProjectionTransform {
+		let angle = Double.pi*(abs(offsetValue-0.5)-0.5)
+        
+		var transform3d = CATransform3DIdentity;
+		transform3d.m34 = -1/max(size.width, size.height) // setting up the perspective projection
+		transform3d = CATransform3DTranslate(transform3d, size.width/2.0, size.height/2.0, 0)
+		transform3d = CATransform3DRotate(transform3d, CGFloat(angle), 0, 1, 0)
+		transform3d = CATransform3DTranslate(transform3d, -size.width/2.0, -size.height/2.0, 0)
+		
+		return ProjectionTransform(transform3d)
+    }
+}
+{% endhighlight %}
 
 ## Better use-cases 
 
@@ -285,6 +315,10 @@ Such combinations in multiple axis allows us to **break animation into smaller p
 
 That is all for today, you can find all codes at this [github repo]
 
+*Update 3rd of September 2019*
+
+There is another great material about GeometryEffect by [SwiftUI Lab] - I really recommend reading it
+
 
 *Did you like this article?*
 
@@ -300,6 +334,8 @@ That is all for today, you can find all codes at this [github repo]
 [ButtonStyle]: https://developer.apple.com/documentation/swiftui/buttonstyle
 [Swift Talk #166]: https://talk.objc.io/episodes/S01E166-geometry-effects
 [github repo]: https://github.com/izakpavel/GeometryEffectAnimations
+[CATtransform3D]: https://developer.apple.com/documentation/quartzcore/catransform3d
+[SwiftUI Lab]: https://swiftui-lab.com/swiftui-animations-part2/
 
 [sliderImage]: /assets/posts/sliderImage.gif "Moving slider"
 [sliderButtons]: /assets/posts/sliderButtons.gif "Controlling position with buttons"
