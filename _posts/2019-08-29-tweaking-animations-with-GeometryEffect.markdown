@@ -143,7 +143,8 @@ You can see in the example that even though our effect aims on the rotation, we 
 
 Since [ProjectionTransform] supports initialization from [CATtransform3D] structure, it is possible to introduce full 3D transformations of the view. 
 
-In the example below the rotation along y axis is introduced. Note setting of `m34` element that sets the perspective parameter of the projection transformation. Without that the projection of the view is orthographic.
+In the example below the rotation along y axis is introduced. Note setting of `m34` element that sets the perspective parameter of the projection transformation. Without that the projection of the view is orthographic. Similarly as before, since the origin of the object space is in top left corner, we need to apply two translation transformations. Here the first is being done in 3D space to shift center of rotation and tha latter is affine transformation in view space.
+
 
 {% highlight swift %}
 struct CustomRotationEffect3D: GeometryEffect {
@@ -159,12 +160,13 @@ struct CustomRotationEffect3D: GeometryEffect {
 		let angle = Double.pi*(abs(offsetValue-0.5)-0.5)
         
 		var transform3d = CATransform3DIdentity;
-		transform3d.m34 = -1/max(size.width, size.height) // setting up the perspective projection
-		transform3d = CATransform3DTranslate(transform3d, size.width/2.0, size.height/2.0, 0)
-		transform3d = CATransform3DRotate(transform3d, CGFloat(angle), 0, 1, 0)
-		transform3d = CATransform3DTranslate(transform3d, -size.width/2.0, -size.height/2.0, 0)
-		
-		return ProjectionTransform(transform3d)
+		transform3d.m34 = -1/max(size.width, size.height) // setting perspective projection
+		transform3d = CATransform3DRotate(transform3d, a, 0, 1, 0)
+		transform3d = CATransform3DTranslate(transform3d, -size.width/2.0, -size.height/2.0, 0) // shifting anchor of rotation
+
+		let affineTransform = ProjectionTransform(CGAffineTransform(translationX: size.width/2.0, y: size.height / 2.0)) // shifting back in screen space
+
+		return ProjectionTransform(transform3d).concatenating(affineTransform)
     }
 }
 {% endhighlight %}
