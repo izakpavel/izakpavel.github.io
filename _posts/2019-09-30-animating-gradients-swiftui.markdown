@@ -5,7 +5,7 @@ date: 2019-09-30
 author: Pavel Zak
 categories: development
 tags:	swiftUI hueRotation animation iosDev gradient
-cover:  "/assets/posts/geometryEffectCover.jpg"
+cover:  "/assets/posts/animatingGradientCover.jpg"
 ---
 
 [SwiftUI] animation system is simply amazing. But when using gradient fills, it is impossible to animate color change by just changing its color properties. In this article, I will present and discuss possible ways how to animate gradient fills and also address the issue with `.hueRotation` modifier.
