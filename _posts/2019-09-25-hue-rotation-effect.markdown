@@ -47,8 +47,8 @@ struct AnimatedGradientView1: View {
 ![animatedGradient1]
 
 ### Using hueRotation modifier
-Using `.hueRotation` is the easiest way of gradient alterations. It offers animations in whole variety of color hues but does not let you to change color randomly. 
-More color changes can be achieved by combination with other modifiers like `.brightness` or `.saturation`, but they still reflects the source colors and theirs mutual difference. Next exampe features usage of hueRotation modifier together with decreasing saturation.
+Using `.hueRotation` is the easiest way of gradient alterations. It offers animations in a whole variety of color hues but does not let you change color randomly. 
+More color changes can be achieved by combination with other modifiers like `.brightness` or `.saturation`, but they still reflect the source colors and their mutual difference. Next example features usage of hueRotation modifier together with decreasing saturation.
 
 {% highlight swift %}
 struct AnimatedGradientView2: View {
@@ -76,15 +76,15 @@ struct AnimatedGradientView2: View {
 ![animatedGradient2]
 
 
-While playing with hueRotation modifiers, I have noticed that it works differently than one would expect. This modifier does not preserve brightness and saturation as it is common in graphical tools (like PS). Here you can see comparison of results of hueRotation modifier and the expectation via constructing the color directly in HSB space. I am not sure whether this behaviour is intended or not, but it is important to be aware of it the result of hueRotation may disappoint you.
+While playing with hueRotation modifiers, I have noticed that it works differently than one would expect. This modifier does not preserve brightness and saturation as it is common in graphical tools (like PS). Here you can see a comparison of results of hueRotation modifier and the expectation via constructing the color directly in HSB space. I am not sure whether this behavior is intended or not, but it is important to be aware of it the result of hueRotation may disappoint you.
 
 ![colorDifference]
 
 ### Using AnimatableModifier
 
-It is possible to create animated gradient via [AnimatableModifier]. This approach was presented by Javier (Kudos!!) in his article at [SwiftUI Lab].
-This approach requires implementation of color interpolation and its usage of AnimatableModifier reminds me of GeometryEffect (which I have dedicated my previous post to). 
-We have full control how interpolated value is translated to the view appearance so we can reach really crazy effects like pulsating color transition. This is demonstrated on the following example where interpolation value is altered to growing sine curve according to formula x+sin(8.5*Pi*x)*0.1
+It is possible to create an animated gradient via [AnimatableModifier]. This approach was presented by Javier (Kudos!!) in his article at [SwiftUI Lab].
+This approach requires the implementation of color interpolation and its usage of AnimatableModifier reminds me of GeometryEffect (which I have dedicated my previous post to). 
+We have full control of how interpolated value is translated to the view appearance so we can reach really crazy effects like pulsating color transition. This is demonstrated on the following example where interpolation value is altered to growing sine curve according to formula x+sin(8.5*Pi*x)*0.1
 
 ![plot]
 
@@ -158,14 +158,14 @@ struct AnimatableGradientModifier: AnimatableModifier {
 ![animatedGradient3]
 
 
-Please note that AnimatableModifier actually produces a view, so even that it has been applied to a circle view, our result is still rounded rectangle.
+Please note that AnimatableModifier actually produces a view, so even that it has been applied to a circle view, our result is still a rounded rectangle.
 
-Main drawback of this approach (IMO) is that you need to provide interpolating value to the effect and it is quite challenging to wrap everything to simple interface with single color setter.
+The main drawback of this approach (IMO) is that you need to provide interpolating value to the effect and it is quite challenging to wrap everything to a simple interface with the single color setter.
 
 
 ### Blending of two gradient layers
 
-The solution that i like the most is simple blending of two gradient layers. It is a sort of workaround, but gives you the greatest freedom, it is easy to wrap with meaningful interface and since the blending views can be actually of any type, you can even create transitions between different types of gradient (like linear->radial)
+The solution that I like the most is the simple blending of two gradient layers. It is a sort of workaround but gives you the greatest freedom, it is easy to wrap with a meaningful interface and since the blending views can be actually of any type, you can even create transitions between different types of the gradient (like linear->radial)
 The example demonstrates this approach, color changes are random
 
 {% highlight swift %}
@@ -218,7 +218,7 @@ struct AnimatedGradientView4: View {
 
 *Did you like this article?*
 
-*Feel free to comment or criticise so the next one is even better. Or share it with other SwiftUI adopters ;)*
+*Feel free to comment or criticize so the next one is even better. Or share it with other SwiftUI adopters ;)*
 
 
 
