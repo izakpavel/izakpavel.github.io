@@ -8,7 +8,7 @@ tags:	swiftUI game experience resources
 cover:  "/assets/posts/lookbackCover.jpg"
 ---
 
-I created a game. In SwiftUI. A madness, you might say? Wel...
+I created a game. In SwiftUI. A madness, you might say? Well...
 
 I fully dived in [SwiftUI] two+ months ago. Since the best thing to learn something is actually to ship a product I decided to create a game. Why? I was amazed by SwiftUI animation capabilities and it seemed to suit my idea for the game mechanics pretty well.
 
