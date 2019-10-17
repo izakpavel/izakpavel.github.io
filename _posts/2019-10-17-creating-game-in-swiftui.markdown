@@ -18,7 +18,7 @@ In this post, I would like to look back on those two months and put together a l
 
 This post is not intended to promote the game itself, but for the context of what was actually created, check out short trailer.
 
-[![Flipinity trailer](http://img.youtube.com/vi/glsHiZwmTS0/0.jpg)](https://www.youtube.com/watch?v=glsHiZwmTS0)
+[![Flipinity trailer](/assets/posts/flipinityVideo.jpg)](https://www.youtube.com/watch?v=glsHiZwmTS0)
 
 ## Living in Beta
 
