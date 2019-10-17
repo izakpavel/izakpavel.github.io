@@ -14,9 +14,9 @@ I fully dived in [SwiftUI] two+ months ago. Since the best thing to learn someth
 
 In this post, I would like to look back on those two months and put together a little summary of my experience with this new tech and recommendation for those who are thinking about starting using SwiftUI as well.
 
-## Flipinity
+## Flipinity Puzzle
 
-This post is not intended to promote the game itself, but for the context of what was actually created, check out short trailer. In case you are interested in more details about the game story, I have created a separate [blog post] with that.
+This post is not intended to promote the game itself, but for the context of what was actually created, check out short trailer.
 
 [![Flipinity trailer](http://img.youtube.com/vi/glsHiZwmTS0/0.jpg)](https://www.youtube.com/watch?v=glsHiZwmTS0)
 
@@ -69,7 +69,7 @@ So what is my conclusion? Is SwiftUI a good tool to write a game with? I would s
 
 I kinda fell in love with SwiftUI and all my upcoming apps will be certainly written in it!
 
-## Note to potential beginners
+## Word to potential newcomers
 
 At recently visited conferences and Twitter threads, I came across several discussions if it is already the right time to start with SwiftUI. As you can sense from my post, I say: "YES! Do not be afraid of it". The community is growing fast, several books were published recently by renowned authors so the chance you will be feeling lost is now almost zero.
 
