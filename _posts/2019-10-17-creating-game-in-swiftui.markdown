@@ -77,7 +77,7 @@ If I may advise some of the SwiftUI resources I have experience with:
 
 * start with [Apple tutorials] and [WWDC19] videos
 * there is a packed [visual reference] created by Mark Moeykens.
-* if you wish to understand context and background more, I recommend [SwiftUI Kickstart] by Daniel Stahlberg
+* if you wish to understand context and background more, I recommend [SwiftUI Kickstart] by Daniel Steinberg
 * articles covering more advanced topics can be found at [SwiftUILab]. Javier is doing excellent job in digging deep into SwiftUI and has influenced my previous blog posts as well
 * great set of articles related to various areas like styling, app architecture, custom containers and more lives at [Majid's blog] 
 
