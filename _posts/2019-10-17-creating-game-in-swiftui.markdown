@@ -55,7 +55,7 @@ Most challenges I have faced resulted from the unknown environment and the Beta 
 
 * **You cannot throw UIKit away** - The set of *standard* views available in SwiftUI is limited when compared to what we used to have in UIKit. Views like UIPageControl, MKMapView have no counter part in SwiftUI yet and you need to wrap them as [UIViewRepresentable].
 
-* **Compiler errors** - Unfortunately, XCode is still quite terrible at letting you know what is wrong. It is quite common that it reports issues from the correct part of your code or simply returns that it is impossible to type check expression in a reasonable time. ![compilerError]
+* **Compiler errors** - Unfortunately, XCode is still quite terrible at letting you know what is wrong. It is quite common that it reports issues from the correct part of your code or simply returns that it is impossible to type check expression in a reasonable time. ![compilerError] *Edit 18/10/19: New diagnostic architecture planned for upcoming swift 5.2 should solve some of these issues.*
 
 * *Uncertain future*  - One thing that I am curious about is how SwiftUI will evolve. I suspect that we can witness future changes that may not be fully backward compatible - like we saw during various Swift versions.
 
@@ -96,6 +96,7 @@ If I may advise some of the SwiftUI resources I have experience with:
 [UIViewRepresentable]:https://developer.apple.com/documentation/swiftui/uiviewrepresentable
 [blog post]: "TODO"
 [visual reference]: https://www.bigmountainstudio.com/swiftui-views-book
+[diagnostic architecture]: https://swift.org/blog/new-diagnostic-arch-overview/
 
 [matrix]: https://media1.tenor.com/images/5505bcb204761c1f9c979a085d5fd4ec/tenor.gif?itemid=8390287 "Code readablility"
 [compilerError]: /assets/posts/compilerError.png "Compiler Error"
