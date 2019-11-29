@@ -21,7 +21,7 @@ I usually start with the preparation of custom shapes and paths that will be lat
 The Venus shape implementation consists of one ellipse and a set of lines forming the cross below. Note that the center of the bounds is aligned with the center of the ellipse - we will benefit from this later when we will rotate the whole shape.
 
 {% highlight swift %}
-struct SexShape: Shape {
+struct GenderShape: Shape {
     var stroke: CGFloat
 	    
     func path(in rect: CGRect) -> Path {
@@ -69,7 +69,7 @@ Let's add a new property called `arroweness`, that will control the position of 
 
 {% highlight swift %}
 
-struct SexShape: Shape {
+struct GenderShape: Shape {
     var arroweness: CGFloat// 0..1
     var stroke: CGFloat = 10
     
@@ -149,7 +149,7 @@ struct GenderToggle: View {
                 .frame(width: baseWidth, height: baseHeight)
                 .overlay(rectangleOverlay) // add color gradient over background
             
-            SexShape(arroweness: 0.0, stroke: stroke)
+            GenderShape(arroweness: 0.0, stroke: stroke)
                 .frame(width: baseHeight+6*stroke-2*gap, height: baseHeight+6*stroke-2*gap)
                 .overlay(whiteButton)
                 
@@ -202,7 +202,7 @@ struct GenderToggle: View {
                 .frame(width: baseWidth, height: baseHeight)
                 .overlay(rectangleOverlay) // add color gradient over background
             
-            SexShape(arroweness:  gender == .boy ? 1.0 : 0.0, stroke: stroke)
+            GenderShape(arroweness:  gender == .boy ? 1.0 : 0.0, stroke: stroke)
                 .frame(width: baseHeight+6*stroke-2*gap, height: baseHeight+6*stroke-2*gap)
                 .rotationEffect(Angle(degrees: gender == .boy ? -135 : 0))
                 .offset(CGSize(width:gender == .boy ? 10 : -10, height:0))
