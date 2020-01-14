@@ -13,9 +13,9 @@ Hello and welcome to another blog post about SwiftUI. This time, we will talk ab
 
 ## AnimatableData
 
-Animating simple shapes is easy thanks to `animatableData` property. We have seen example of such animation in my previous post about [custom controls]. The magic behind `animatableData` is actually quite simple math. During the animation, the property value is being interpolated (or extrapolated in case of spring animation) from starting to the ending value according to the animation timing curve.
+Animating simple shapes is easy thanks to `animatableData` property. We have seen an example of such animation in my previous post about [custom controls]. The magic behind `animatableData` is actually quite simple math. During the animation, the property value is being interpolated (or extrapolated in case of spring animation) from starting to the ending value according to the animation timing curve.
 
-To demonstrate it once again, lets start with a simple rectangle with cout-out rounded corners. 
+To demonstrate it once again, let's start with a simple rectangle with cout-out rounded corners. 
 
 {% highlight swift %}
 struct CoutOutRectangle: Shape {
@@ -52,9 +52,9 @@ struct CoutOutRectangle: Shape {
 
 Notice that I have created a single property called `cornerRadius` that is being set or read from `animatableData` setter and getter. That is enough for SwiftUI to perform the animation whenever we change the corner radius. 
 
-Lets test it within a simple demo view that periodically animates corners from value 0 to 20 and back. 
+Let's test it within a simple demo view that periodically animates corners from value 0 to 20 and back. 
 
-You can try to change animation type or its parameters to see how the animation changes.
+You can try to change the animation type or its parameters to see how the animation changes.
 
 {% highlight swift %}
 struct AnimationDemoView: View {
@@ -81,7 +81,7 @@ It works!
 
 Now, in the case things are more complicated and we need to animate the shape according to two values, we can utilize `AnimatablePair<T>` type. Here the only obstacle is to define the right getter and setter to pass data between our control properties and values stored in AnimatablePair.
 
-As a example, we will build a wedge shape that can be used to compose pie charts. The wedge has two main properties - `angleOffset` and `wedgeWidth` that we both want to be animatable. The best explanation of both properties gives following illustration:
+As an example, we will build a wedge shape that can be used to compose pie charts. The wedge has two main properties - `angleOffset` and `wedgeWidth` that we both want to be animatable. The best explanation of both properties gives the following illustration:
 
 And the resulting code is here. Note how AnimatablePair`s first and second values are being mapped to our properties.
 
@@ -136,7 +136,7 @@ This is actually used within the implementation of `EdgeInsets` type, but as you
 
 Luckily, there is a better approach. As `animatableData` can be set any type that implements to `VectorArithmetic` protocol. As we have seen, it is implemented by basic scalar types like `Double` or `CGFloat` and of course by AnimatablePair`.
 
-Knowing that, let us implement a brand new type called `AnimatableVector` that will be able to hold up to `N` values. The `VectorArithmetic` requires definition of `magnitudeSquared` property and `scale` method plus implementation of addition and subtraction operations from `AdditiveArithmetic`. Our type is implemented as a standard Euclidean vector: addition, subtraction and scale of these vectors are being done per-value and magnitude of the vector is computed as a sum of all squared values. In case you need to refresh this part of high-school math, check this [wikipedia article].
+Knowing that, let us implement a brand new type called `AnimatableVector` that will be able to hold up to `N` values. The `VectorArithmetic` requires definition of `magnitudeSquared` property and `scale` method plus implementation of addition and subtraction operations from `AdditiveArithmetic`. Our type is implemented as a standard Euclidean vector: addition, subtraction, and scale of these vectors are being done per-value and the magnitude of the vector is computed as a sum of all squared values. In case you need to refresh this part of high-school math, check this [wikipedia article].
 
 The whole implementation of `AnimatableVector`:
 
@@ -226,9 +226,9 @@ struct AnimatableVector: VectorArithmetic {
 }
 {% endhighlight %}
 
-With `AnimatableVector` you have now complete freedom in building animatable shapes and views. One of the most handy use case is probably the creation of various animatable charts, so let me demonstrate it here as well.
+With `AnimatableVector` you have now complete freedom in building animated shapes and views. One of the handiest use cases is probably the creation of various animated charts, so let me demonstrate it here as well.
 
-I present you my implementation of `AnimatableGraph` that plots the values either as a chart line or whole area below it. As you can see, the chart values (here named as `controlPoints`) are stored and passed as `AnimatableVector`
+I present to you my implementation of `AnimatableGraph` that plots the values either as a chart line or whole area below it. As you can see, the chart values (here named as `controlPoints`) are stored and passed as `AnimatableVector`.
 
 {% highlight swift %}
 struct AnimatableGraph: Shape {
@@ -291,6 +291,7 @@ struct DemoChart: View {
 }
 {% endhighlight %}
 
+![animatedChart]
 
 ## The challenge
 
@@ -301,7 +302,7 @@ Do not hesitate to share your solution or ask for help, I will gladly assist you
 
 *Did you enjoy this article? Do you have anything to add?*
 
-*Feel free to comment or criticise so the next one is even better. Or share it with other SwiftUI adopters ;)*
+*Feel free to comment or criticize so the next one is even better. Or share it with other SwiftUI adopters ;)*
 
 
 [SwiftUI]: https://developer.apple.com/documentation/swiftui
@@ -309,8 +310,9 @@ Do not hesitate to share your solution or ask for help, I will gladly assist you
 [wikipedia article]: https://en.wikipedia.org/wiki/Euclidean_vector
 
 
-[toggle]: /assets/posts/06_toggle.gif "Toggle in action"
 [pieChart]: /assets/posts/07_piechart.gif "Animated pie chart composed from several wedges"
+[animatedChart]: /assets/posts/07_piechart.gif "Animated chart"
+[wedgeExplanation]: /assets/posts/07_piechart.gif "Explanation of wedge parameters"
 
 [rectangle]: /assets/posts/07_cutoutrectangle.gif "Animated rectangle with cut out corners"
 
