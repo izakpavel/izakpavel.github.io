@@ -5,7 +5,7 @@ date: 2020-01-12
 author: Pavel Zak
 categories: development
 tags:	swiftUI shape animation animatableData animatablePair animatableVector path charts
-cover:  "/assets/posts/06_blueprint.jpg"
+cover:  "/assets/posts/07_cover.jpg"
 ---
 
 Hello and welcome to another blog post about SwiftUI. This time, we will talk about the animation of complex shapes in SwiftUI. You will understand animatableData property and will be able to implement animatable custom Shape struct that depends on multiple parameters. 
@@ -82,6 +82,8 @@ It works!
 Now, in the case things are more complicated and we need to animate the shape according to two values, we can utilize `AnimatablePair<T>` type. Here the only obstacle is to define the right getter and setter to pass data between our control properties and values stored in AnimatablePair.
 
 As an example, we will build a wedge shape that can be used to compose pie charts. The wedge has two main properties - `angleOffset` and `wedgeWidth` that we both want to be animatable. The best explanation of both properties gives the following illustration:
+
+![wedgeExplanation]
 
 And the resulting code is here. Note how AnimatablePair`s first and second values are being mapped to our properties.
 
@@ -297,6 +299,8 @@ struct DemoChart: View {
 
 Now try to play with the AnimationVector by yourself and as a challenge implement morphable shapes like this one below.
 
+![animatedShapes]
+
 Do not hesitate to share your solution or ask for help, I will gladly assist you.
 
 
@@ -306,13 +310,14 @@ Do not hesitate to share your solution or ask for help, I will gladly assist you
 
 
 [SwiftUI]: https://developer.apple.com/documentation/swiftui
-[custom controls]: TODO
+[custom controls]: https://nerdyak.tech/development/2019/11/28/creating-custom-views-in-swiftui.html
 [wikipedia article]: https://en.wikipedia.org/wiki/Euclidean_vector
 
 
 [pieChart]: /assets/posts/07_piechart.gif "Animated pie chart composed from several wedges"
-[animatedChart]: /assets/posts/07_piechart.gif "Animated chart"
-[wedgeExplanation]: /assets/posts/07_piechart.gif "Explanation of wedge parameters"
+[animatedChart]: /assets/posts/07_chart.gif "Animated chart"
+[wedgeExplanation]: /assets/posts/07_wedge.gif "Explanation of wedge parameters"
+[animatedShapes]: /assets/posts/07_shapes.gif "Challenge with morphing shapes"
 
 [rectangle]: /assets/posts/07_cutoutrectangle.gif "Animated rectangle with cut out corners"
 
