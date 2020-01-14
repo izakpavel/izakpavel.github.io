@@ -4,7 +4,7 @@ title: "Animating complex shapes in SwiftUI"
 date: 2020-01-12
 author: Pavel Zak
 categories: development
-tags:	swiftUI shape animation animatableData path
+tags:	swiftUI shape animation animatableData path charts
 cover:  "/assets/posts/06_blueprint.jpg"
 ---
 
@@ -18,7 +18,7 @@ Animating shapes can be easy thanks to `animatableData` property. We have seen e
 To demonstrate it once again, lets start with a simple rectangle with cout-out rounded corners. 
 
 {% highlight swift %}
-struct TileShape: Shape {
+struct CoutOutRectangle: Shape {
     var cornerRadius: CGFloat
     
     var animatableData: CGFloat {
@@ -50,21 +50,38 @@ struct TileShape: Shape {
 {% endhighlight %}
 
 
-Notice that I have created a single property called `cornerRadius` that is being set or read from `animatableData` setter and getter. That is enough for SwiftUI to perform the animation whenever we change the corner radius
+Notice that I have created a single property called `cornerRadius` that is being set or read from `animatableData` setter and getter. That is enough for SwiftUI to perform the animation whenever we change the corner radius. 
+
+Lets test it within dumb demo view:
 
 {% highlight swift %}
-TODO example of view with animation
+struct AnimationDemoView: View {
+    @State var cornerRadius: CGFloat = 0.0
+
+    var body: some View {
+        CoutOutRectangle(cornerRadius: self.cornerRadius)
+            .fill(Color.green)
+            .onAppear{
+                withAnimation (Animation.easeOut(duration: 0.4).repeatForever(autoreverses: true)){
+                    self.cornerRadius = 20.0
+                }
+            }
+    }
+}
+
 {% endhighlight %}
 
-[rectangle example animation]
+It works!
+
+![rectangle]
 
 ## AnimatablePair
 
-In the case things are more complicated and we need to animate the shape according to two values, we can utilize `AnimatablePair<T>` type. Here the only obstacle is to define the right getter and setter to pass data between our control properties and values stored in AnimatablePair.
+Now, in the case things are more complicated and we need to animate the shape according to two values, we can utilize `AnimatablePair<T>` type. Here the only obstacle is to define the right getter and setter to pass data between our control properties and values stored in AnimatablePair.
 
 As a example, we will build a wedge shape that can be used to compose pie charts. The wedge has two main properties - `angleOffset` and `wedgeWidth` that we both want to be animatable. The best explanation of both properties gives following illustration:
 
-And the resulting code is here, note how AnimatablePair first and second values are being mapped to our properties.
+And the resulting code is here. Note how AnimatablePair`s first and second values are being mapped to our properties.
 
 {% highlight swift %}
 struct WedgeShape: Shape {
@@ -100,7 +117,9 @@ struct WedgeShape: Shape {
 }
 {% highlight swift %}
 
-Having wedge shape ready, it is now possible to build a stack of these views to build a animatable piechart, like this
+Having wedge shape ready, it is now possible to build a ZStack of these views to create an animatable piechart, like this:
+
+![pieChart]
 
 ## AnimatableVector
 
@@ -132,7 +151,8 @@ Do not hesitate to share your solution or ask for help, I will gladly assist you
 
 
 [toggle]: /assets/posts/06_toggle.gif "Toggle in action"
-[anatomy]: /assets/posts/06_anatomy.jpg "Dimensions"
-[draft]: /assets/posts/06_draft.jpg "Shape schematics"
-[transformation]: /assets/posts/06_transformation.gif "Shape transformation"
+[pieChart]: /assets/posts/07_piechart.gif "Animated pie chart composed from several wedges"
+
+[rectangle]: /assets/posts/07_cutoutrectangle.gif "Animated rectangle with cut out corners"
+
 
