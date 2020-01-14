@@ -134,11 +134,13 @@ First, it is possible to cascade multiple `AnimatablePairs` to pass more (like 3
 AnimatablePair<CGFloat, AnimatablePair<CGFloat, AnimatablePair<CGFloat, CGFloat>>>
 {% endhighlight %}
 
-This is actually used within the implementation of `EdgeInsets` type, but as you can guess, it is not very flexible and usable for more than 5 or six values.
+This is actually used within the implementation of `EdgeInsets` type, but as you can guess, it is not very flexible and usable for more than five or six values.
 
-Luckily, there is a better approach. As `animatableData` can be set any type that implements to `VectorArithmetic` protocol. As we have seen, it is implemented by basic scalar types like `Double` or `CGFloat` and of course by AnimatablePair`.
+Luckily, there is a better approach. As `animatableData` can be set any type that implements to `VectorArithmetic` protocol. As we have seen, it is implemented by basic scalar types like `Double` or `CGFloat` and of course by `AnimatablePair`.
 
-Knowing that, let us implement a brand new type called `AnimatableVector` that will be able to hold up to `N` values. The `VectorArithmetic` requires definition of `magnitudeSquared` property and `scale` method plus implementation of addition and subtraction operations from `AdditiveArithmetic`. Our type is implemented as a standard Euclidean vector: addition, subtraction, and scale of these vectors are being done per-value and the magnitude of the vector is computed as a sum of all squared values. In case you need to refresh this part of high-school math, check this [wikipedia article].
+Knowing that, let us implement a brand new type called `AnimatableVector` that will be able to hold up to `N` values. The `VectorArithmetic` requires definition of `magnitudeSquared` property and `scale` method plus implementation of addition and subtraction operations from `AdditiveArithmetic`. 
+
+Our type is implemented as a standard Euclidean vector: addition, subtraction, and scale of these vectors are being done per-value and the magnitude of the vector is computed as a sum of all squared values. In case you need to refresh this part of high-school math, check this [wikipedia article].
 
 The whole implementation of `AnimatableVector`:
 
@@ -297,11 +299,14 @@ struct DemoChart: View {
 
 ## The challenge
 
-Now try to play with the AnimationVector by yourself and as a challenge implement morphable shapes like this one below.
+Now try to play with the `AnimationVector` by yourself and as a challenge implement morphable shapes like this one below:
 
 ![animatedShapes]
 
 Do not hesitate to share your solution or ask for help, I will gladly assist you.
+
+I am looking forward to see your output!
+
 
 
 *Did you enjoy this article? Do you have anything to add?*
@@ -316,7 +321,7 @@ Do not hesitate to share your solution or ask for help, I will gladly assist you
 
 [pieChart]: /assets/posts/07_piechart.gif "Animated pie chart composed from several wedges"
 [animatedChart]: /assets/posts/07_chart.gif "Animated chart"
-[wedgeExplanation]: /assets/posts/07_wedge.gif "Explanation of wedge parameters"
+[wedgeExplanation]: /assets/posts/07_wedge.jpg "Explanation of wedge parameters"
 [animatedShapes]: /assets/posts/07_shapes.gif "Challenge with morphing shapes"
 
 [rectangle]: /assets/posts/07_cutoutrectangle.gif "Animated rectangle with cut out corners"
