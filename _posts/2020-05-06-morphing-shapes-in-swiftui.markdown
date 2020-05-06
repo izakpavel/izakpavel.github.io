@@ -5,10 +5,10 @@ date: 2020-05-06
 author: Pavel Zak
 categories: development
 tags:	swiftUI shape animation animatableData animatablePair animatableVector path morphing transition
-cover:  "/assets/posts/07_cover.jpg"
+cover:  "/assets/posts/09_cover.jpg"
 ---
 
-Hello and welcome to another blog post about [SwiftUI] animations. In the [previous post] dedicated mainly to `AnimatableData`, we have constructed `animatableVector` that allowed us to create animatable charts. Today we will utilize the same animatableVector for the shape morphing.  
+Hello and welcome to another blog post about [SwiftUI] animations. In the [previous post] dedicated mainly to `AnimatableData`, we have constructed `AnimatableVector` that allowed us to create animatable charts. Today we will utilize the same class for morphing shapes.  
 
 
 ## Shape representation
@@ -17,13 +17,13 @@ Shapes in SwiftUI can be constructed as a composition of vector paths and/or sha
 
 The most common approach is to describe the shape as an approximation of its outline using a finite set of line segments. This means, that we will distribute `N` points around the shape outline and when doing the morphing animation, we can easily move these outline points from the position given by shape A to the new position in the shape B. For better understanding, check the following illustration:
 
-[morphExplanation]!
+![morphExplanation]
 
 ## Implementation of morphable shape in SwiftUI
 
 So how to implement all of this in SwiftUI? Let me start with a new shape representation based on multiple control points. This is quite easy, the only crucial part is that these control points are being represented using our `AnimatableVector` so it is capable to morph using animation. 
 
-But hey - the shape points are two-dimensional (having x and y coordinate), while our `animatableVector` holds only an array of Doubles. What can be done about that? Well, there are two solutions:
+But hey - the shape points are two-dimensional (having x and y coordinate), while our `AnimatableVector` holds only an array of Doubles. What can be done about that? Well, there are two solutions:
 * you can implement another custom vector holding array of `CGPoints` and let it conform to the `AnimatableData` protocol
 * or use the same `AnimatableVector` and expect even indexed component to be x coordinate and odd-indexed components to by y coordinate. I choose this solution for the following `MorphableShape` implementation:
 
@@ -44,15 +44,18 @@ struct MorphableShape: Shape {
     func path(in rect: CGRect) -> Path {
         return Path { path in
             
-            path.move(to: self.point(x: self.controlPoints.values[0], y: self.controlPoints.values[1], rect: rect))
+            path.move(to: self.point(x: self.controlPoints.values[0], 
+				                     y: self.controlPoints.values[1], rect: rect))
             
             var i = 2;
             while i < self.controlPoints.values.count-1 {
-                path.addLine(to:  self.point(x: self.controlPoints.values[i], y: self.controlPoints.values[i+1], rect: rect))
+                path.addLine(to:  self.point(x: self.controlPoints.values[i], 
+					                         y: self.controlPoints.values[i+1], rect: rect))
                 i += 2;
             }
             
-            path.addLine(to:  self.point(x: self.controlPoints.values[0], y: self.controlPoints.values[1], rect: rect))
+            path.addLine(to:  self.point(x: self.controlPoints.values[0], 
+				                         y: self.controlPoints.values[1], rect: rect))
         }
     }
 }
@@ -60,7 +63,7 @@ struct MorphableShape: Shape {
 
 Let's check the implementation using several random points:
 
-[morphExample]!
+![morphExample]
 
 {% highlight swift %}
 // hepler func creating vector with random values
@@ -72,7 +75,8 @@ func randomVector(count: Int)->AnimatableVector {
 // demo view for our proof of concept of morphable shapes
 struct DemoView: View {
     static let pointCount = 8 // number of control points
-    @State var controlPoints: AnimatableVector = randomVector(count: pointCount*2) // vector holds twice as numbers
+	// vector holds twice as many elements
+    @State var controlPoints: AnimatableVector = randomVector(count: pointCount*2) 
     
     var body: some View {
         VStack {
@@ -132,7 +136,8 @@ Now it can be utilized like this:
 {% highlight swift %}
 let N = 100
 let shape = Circle() // or any other shape
-let shapeControlPoints: AnimatableVector = shape.path(in: CGRect(x: 0, y: 0, width: 1, height: 1)).controlPoints(count: N)
+let shapeControlPoints: AnimatableVector = shape.path(in: CGRect(x: 0, y: 0, width: 1, height: 1))
+                                                .controlPoints(count: N)
 {% endhighlight %}
 
 Pls note, that with setting the `CGRect` size to 1 we are assuring to have the control point coordinates in the range `0...1` which is exactly what our `MorphableShape` expects to get.
@@ -150,12 +155,16 @@ If you are wondering, what is this all good for, I present here several ideas:
 * transitions
 // obr
 * creating a pointless music video in swiftUI
-// youtube
+
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/r_XorK0cjv8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
 
 ## Notes
 
 * Described algorithm works well for one-component / compact shapes. It works also for multi-component shapes, but the resulting animation may not be eye-pleasant.
-* For large curved and complex shapes, the number of control points needs to be quite high (hundreds at least)
+* For large curved and complex shapes, the number of control points needs to be quite high (hundreds at least) to have smooth result.
+* The only tricky thing with this approach is that the shapes may differ in the origin and direction of how they are being constructed. If these parameters are different, the morphing animation would not work as expected.
 
 
 *Did you like this article? What do you want me to focus on next?*
