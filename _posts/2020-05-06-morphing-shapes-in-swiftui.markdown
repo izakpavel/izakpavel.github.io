@@ -105,7 +105,7 @@ struct DemoView: View {
 
 All the above code is enough to morph any shape to any shape, but getting the shape representation as a set of control points may be tricky. Well, it is definitively something you cannot put together "by hand".
 
-Luckily, there is a way how to generate them using SwiftUI [Path] API. We can sample the shape outline using the `trimmedPath` method, so let me create a simple Path extension, that provides vector of N control points along any Path:
+Luckily, there is a way how to generate them using SwiftUI [Path] API. We can sample the shape outline using the `trimmedPath()` method, so let me create a simple Path extension, that provides a vector of N control points along any Path:
 
 {% highlight swift %}
 
@@ -131,7 +131,7 @@ extension Path {
 }
 {% endhighlight %}
 
-Now it can be utilized like this: 
+Now, it can be utilized like this: 
 
 {% highlight swift %}
 let N = 100
@@ -140,7 +140,7 @@ let shapeControlPoints: AnimatableVector = shape.path(in: CGRect(x: 0, y: 0, wid
                                                 .controlPoints(count: N)
 {% endhighlight %}
 
-Pls note, that with setting the `CGRect` size to 1 we are assuring to have the control point coordinates in the range `0...1` which is exactly what our `MorphableShape` expects to get.
+Please, note, that with setting the `CGRect` size to 1 we are assuring to have the control point coordinates in the range `0...1` which is exactly what our `MorphableShape` expects to get.
 
 And that's it! 
 
@@ -150,10 +150,12 @@ And that's it!
 
 If you are wondering, what is this all good for, I present here several ideas:
 
-* morphing of icons
+* morphing of icons (for multi-state buttons)
+![recording]
+
+* transitions 
 // obr
-* transitions
-// obr
+
 * creating a pointless music video in swiftUI
 
 <center>
@@ -163,7 +165,7 @@ If you are wondering, what is this all good for, I present here several ideas:
 ## Notes
 
 * Described algorithm works well for one-component / compact shapes. It works also for multi-component shapes, but the resulting animation may not be eye-pleasant.
-* For large curved and complex shapes, the number of control points needs to be quite high (hundreds at least) to have smooth result.
+* For large curved and complex shapes, the number of control points needs to be quite high (hundreds at least) to have a smooth result.
 * The only tricky thing with this approach is that the shapes may differ in the origin and direction of how they are being constructed. If these parameters are different, the morphing animation would not work as expected.
 
 
@@ -181,6 +183,7 @@ If you are wondering, what is this all good for, I present here several ideas:
 
 [animatedShapes]: /assets/posts/07_shapes.gif "Demonstration of morphing of various shapes"
 [morphExplanation]: /assets/posts/09_explanation.gif "Morphing using interpolation of control points"
-[morphExample]: /assets/posts/09_example.gif "Morphing using interpolation of control points"
+[morphExample]: /assets/posts/09_example.gif "Morphable shape ready to be animated"
+[recording]: /assets/posts/09_recording.gif "Example of morphing icon on payer view"
 
 
