@@ -153,20 +153,21 @@ If you are wondering, what is this all good for, I present here several ideas:
 * morphing of icons (for multi-state buttons)
 ![recording]
 
-* transitions 
-// obr
+* custom transitions and morphing of clip masks
+![heart]
 
-* creating a pointless music video in swiftUI
+* creating a pointless music video in SwiftUI 🤪
 
 <center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/r_XorK0cjv8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </center>
 
-## Notes
+## Final notes
 
-* Described algorithm works well for one-component / compact shapes. It works also for multi-component shapes, but the resulting animation may not be eye-pleasant.
-* For large curved and complex shapes, the number of control points needs to be quite high (hundreds at least) to have a smooth result.
-* The only tricky thing with this approach is that the shapes may differ in the origin and direction of how they are being constructed. If these parameters are different, the morphing animation would not work as expected.
+* Described algorithm works best for one-component/compact shapes. It works also for multi-component shapes, but the resulting animation may not be eye-pleasant. 
+* For large curved or complex shapes, the number of control points needs to be quite high (hundreds at least) to have a smooth result.
+* The only tricky thing with this approach is that the shapes may differ in the origin and direction of how they are being constructed. If these parameters are different, the morphing animation would not work as expected and shape may "flip" during interpolation. When creating my custom shapes, I usually start the path at the top-left corner and construct the shape in the clockwise direction to avoid these issues. Nevertheles, the control points could be programatically rearranged so the vector always start around the same orientation - but so far I have not implemented this part:)
+* It would be awesome, if we could get Path from SFSymbols....🤞
 
 
 *Did you like this article? What do you want me to focus on next?*
@@ -185,5 +186,6 @@ If you are wondering, what is this all good for, I present here several ideas:
 [morphExplanation]: /assets/posts/09_explanation.gif "Morphing using interpolation of control points"
 [morphExample]: /assets/posts/09_example.gif "Morphable shape ready to be animated"
 [recording]: /assets/posts/09_recording.gif "Example of morphing icon on payer view"
+[heart]: /assets/posts/09_heart.gif "Example of morphing transition"
 
 
