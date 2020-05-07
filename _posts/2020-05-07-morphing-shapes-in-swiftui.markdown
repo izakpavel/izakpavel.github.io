@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Morphing shapes in SwiftUI"
-date: 2020-05-06
+date: 2020-05-07
 author: Pavel Zak
 categories: development
 tags:	swiftUI shape animation animatableData animatablePair animatableVector path morphing transition
