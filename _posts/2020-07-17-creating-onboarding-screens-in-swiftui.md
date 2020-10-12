@@ -203,7 +203,7 @@ Today I have tried to present several ways of building up onboarding screens in 
 
 ➖ no way to mimic true scrollview behavior (if you need it)
 
-➕ clean and easy; you can go crazy with custom transitions, like the one below. But that is for another story and my future blog post 😉.
+➕ clean and easy; you can go crazy with custom transitions, like the one below. But that is for another story and my [next blog post]({% post_url 2020-10-12-transitions-in-swiftui %}) 😉.
 
 ![vid4]
 
