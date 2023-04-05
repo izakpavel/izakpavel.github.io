@@ -50,4 +50,5 @@ google_fonts:
 
 navigation_pages:
   - about.md
+  - showcase.md
   - posts.md
