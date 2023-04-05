@@ -22,7 +22,7 @@ url: # the base hostname & protocol for your site e.g. "https://mmistakes.github
 author: 
   name: Pavel Zak
   twitter: myridiphis
-  picture:
+  picture: /assets/logo.png
 twitter_username: myridiphis
 github_username: izakpavel
 logo: /assets/logo.png
@@ -34,6 +34,8 @@ algolia:
   index_name: # YOUR_INDEX_NAME
   search_only_api_key: # YOUR_SEARCH_ONLY_API_KEY
   powered_by: # true (default), false
+  
+google_analytics: UA-32961149-2
 
 # Build settings
 markdown: kramdown
