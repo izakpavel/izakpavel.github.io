@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Avoid Spacers in SwiftUI Stacks"
-date: 2020-12-12
+date: 2023-04-06
 author: Pavel Zak
 categories: development
 tags:	SwiftUI Spacer Stack Frame
