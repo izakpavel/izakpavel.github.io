@@ -180,9 +180,9 @@ And the last step is to use the modifier for a custom Transition definition:
 {% highlight swift %}
 
 let insertionTransition: AnyTransition = .modifier(active: ShiftTransitionModifier(effectValue: 1), identity: ShiftTransitionModifier(effectValue: 0))
-let removeTransition: AnyTransition = .modifier(active: ShiftTransitionModifier(effectValue: -1), identity: ShiftTransitionModifier(effectValue: 0))
+let removalTransition: AnyTransition = .modifier(active: ShiftTransitionModifier(effectValue: -1), identity: ShiftTransitionModifier(effectValue: 0))
 
-let shiftTransition: AnyTransition = .asymmetric(insertion: insertionTransition, removal: removeTransition)
+let shiftTransition: AnyTransition = .asymmetric(insertion: insertionTransition, removal: removalTransition)
 
 {% endhighlight %}
 
@@ -195,10 +195,36 @@ And we are done.
 </video>
 </center>
 
+## One more thing
+
+If you are wondering, how does the shader look like for the transition from the beginning of this article, it is here:
+(Notice, the shader looks much nicer due to after-experimentation optimizations and utilizing vector operations)
+
+{% highlight swift %}
+[[ stitchable ]] float2 slideAwayShader(float2 position, float2 size, float time, float direction) {
+    float2 c = size/2;
+    float2 v = position - c;
+    
+    float f = (direction > 0 ? position.x : (size.x - position.x) )/size.x;
+    
+    if ( time > f ) {
+        float mul = (time-f)/(1-f);
+        return c + v*mul;
+    }
+    else {
+        return float2(-1, -1);
+    }
+}
+{% endhighlight %}
+
+
+## Your turn!
 
 Now it is **your time** to get creative! 
 
 Let me know, if you find this article helpful, and send me your animations on [Twitter].
+
+
 
 
 [PhaseAnimator]: https://developer.apple.com/documentation/swiftui/phaseanimator/
