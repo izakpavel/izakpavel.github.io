@@ -1,18 +1,23 @@
 ---
 layout: post
-title: "Create transitions with distortion Effect and Metal Shaders"
+title: "SwiftUI transitions with distortion effect and Metal Shaders"
 date: 2023-06-16
 author: Pavel Zak
 categories: development
-tags:	SwiftUI distortionEffect Metal Shaders
+tags:	SwiftUI distortionEffect Metal Shaders transitions
 ---
-his year DubDub is over and I am very excited about the new developer treats that iOS17 will bring us that expand the animation possibilities of SwiftUI. I am talking mainly about the [PhaseAnimator], [KeyframeAnimator] and the ability to utilize Metal shaders on SwiftUI views through modifiers .distortionEffect, .layerEffect, and .colorEffect ([docs]).
+This year DubDub is over and I am very excited about the new developer treats that iOS17 will bring us that expand the animation possibilities of SwiftUI. I am talking mainly about the [PhaseAnimator], [KeyframeAnimator] and the ability to utilize Metal shaders on SwiftUI views through modifiers .distortionEffect, .layerEffect, and .colorEffect ([docs]).
 
 In this post, we will play with the .distortionEffect and learn, how to utilize it for creating custom transitions, like this:
 
-![image1]
+<center>
+<video autoplay="" muted="" loop="" controls="controls">
+	<source src="/assets/posts/15_video1.mov">
+	<source src="/assets/posts/15_video1.webm" type="video/webm">
+</video>
+</center>
 
-#Kickstart
+## Kickstart
 
 
 Let's start with the simple Hello world view and set a basic .distortion effect for the view:
@@ -48,7 +53,7 @@ We need to add a new Metal file to our Xcode project and define the shader funct
 which tells us, that the function can "alter" the position of every pixel of our View. So in the minimum variation, the Shader can look like this
 
 {% highlight swift %}
-\#include <metal_stdlib>
+#include <metal_stdlib>
 using namespace metal;
 
 [[ stitchable ]] float2 demoShader(float2 position) {
@@ -57,6 +62,8 @@ using namespace metal;
 {% endhighlight %}
 
 This is a fully working shader, but you cannot see any effect on the view as it is basically an identity function that just returns the input positions.
+
+![image1]
 
 But with just a few simple alterations to the return value, you start seeing how the view image changes. For example, you can switch the x and y axis and get transposed view.
 
@@ -109,15 +116,20 @@ struct DemoView: View {
 }
 {% endhighlight %}
 
-Try to experiment with the shader parameters and messing the output with various functions. How fun, right?
+Try to experiment with the shader parameters and messing the output with various functions. *How fun*, right?
 
-#Transitions
+## Transitions
 
 Now, let's utilize what we have learned to build a custom view transition. I want to create an effect, that shifts away the content of the view like so:
 
-![image2]
+<center>
+<video autoplay="" muted="" loop="" controls="controls">
+	<source src="/assets/posts/15_video2.mov">
+	<source src="/assets/posts/15_video2.webm" type="video/webm">
+</video>
+</center>
 
-for that, I extend the shader with one more parameter named effectValue, which controls the offset of the view content. My shader looks like this:
+for that, I extend the shader with one more parameter named effectValue, which controls the offset and the skew of the view content. My shader looks like this:
 
 {% highlight swift %}
 [[ stitchable ]] float2 demoShader(float2 position, float2 size, float effectValue) {
@@ -134,9 +146,14 @@ for that, I extend the shader with one more parameter named effectValue, which c
 }
 {% endhighlight %}
 
-and for the testing, I am using a simple slider just to be sure that it behaves correctly for all effectValues between 0 and 1.
+The shader is result of some experimentation session trying to tweak the behavior so it works also for the negative effect values. The goal is to use positive value for insertion transition and negative for removal. While testing, I am using a simple slider just to be sure that it behaves correctly for all effectValues between -1 and 1.
 
-![image2]
+<center>
+<video autoplay="" muted="" loop="" controls="controls">
+	<source src="/assets/posts/15_video3.mov">
+	<source src="/assets/posts/15_video3.webm" type="video/webm">
+</video>
+</center>
 
 Once we are happy with the basic effect, we just wrap it into a view modifier. (I am keeping the size parameter as a constant just for the simplicity of the code snippet. OFC, you can set it dynamically from the actual geometry)
 
@@ -171,16 +188,27 @@ let shiftTransition: AnyTransition = .asymmetric(insertion: insertionTransition,
 
 And we are done.
 
-![image2]
+<center>
+<video autoplay="" muted="" loop="" controls="controls">
+	<source src="/assets/posts/15_video2.mov">
+	<source src="/assets/posts/15_video2.webm" type="video/webm">
+</video>
+</center>
 
-Now it is your time to get creative! Let me know, if you found this article helpful, and send me your animations at [twitter].
+
+Now it is **your time** to get creative! 
+
+Let me know, if you find this article helpful, and send me your animations on [Twitter].
 
 
 [PhaseAnimator]: https://developer.apple.com/documentation/swiftui/phaseanimator/
 [KeyframeAnimator]: https://developer.apple.com/documentation/swiftui/keyframeanimator
 [docs]: https://developer.apple.com/documentation/swiftui/view-graphics-and-rendering#shaders
-[docs]: https://developer.apple.com/documentation/swiftui/view-graphics-and-rendering#shaders
+[Twitter]: https://twitter.com/myridiphis
 
-[image1]: /assets/posts/14_cell.png "Typical view layout"
-[image2]: /assets/posts/14_colors.png "Expected layout and the actual issue"
-[image3]: /assets/posts/14_comparison.png "Comparing solutions"
+[image1]: /assets/posts/15_01.png "Main view"
+[image2]: /assets/posts/15_02.png "Transposed view"
+[image3]: /assets/posts/15_03.png "Flag effect"
+[image4]: /assets/posts/15_04.png "Flag effect"
+
+[video1]: /assets/posts/15_01.png "Transition effect"
