@@ -16,7 +16,7 @@ In this post, I will introduce you to an **alternate and better** approach - ren
 We will start with the following view outline:
 
 {% highlight swift %}
-struct ParticleCanvasView1: View {
+struct ParticleCanvasView: View {
     
     var body: some View {
         TimelineView(.animation) { context in
@@ -47,10 +47,14 @@ At this moment, let's just set the `SingleParticleView` as an orange dot, but we
 struct SingleParticleView: View {
     var body: some View {
         Circle().fill(Color.orange)
-            .frame(width:5, height:5)
+            .frame(width:35, height:35)
     }
 }
 {% endhighlight %}
+
+So far, we have managed to draw a small orange dot, but it is about to change soon ;)
+
+![image1]
 
 ## I like to move it
 
@@ -59,7 +63,7 @@ Now, let's move that particle.
 I will build here a fire-ish effect blending multiple upwards moving particles - so as a good start let's periodically move the single particle up from the canvas bottom:
 
  {% highlight swift %}
-struct ParticleCanvasView1: View {
+struct ParticleCanvasView: View {
     let movementDuration = 2.0
     
     var body: some View {
@@ -85,7 +89,12 @@ struct ParticleCanvasView1: View {
 You can see, that I am controlling the upwards movement with the *time* variable. What exactly is it in this context? Well, the timeline view already gives us access to the time property, but for our use, I want to have something normalized that can be easily bound with the particle movement.
 I want the particle movement to take exactly 2 seconds (see movementDuration) so the code computes time as a truncating remainder, making sure it will periodically grow from 0 to 1 forever. As you can see in the following video:
 
-[TODO video]
+<center>
+<video autoplay="" muted="" loop="" controls="controls" width="400">
+	<source src="/assets/posts/16_video_01.mov">
+	<source src="/assets/posts/16_video_01.webm" type="video/webm">
+</video>
+</center>
 
 ## Remember goniometry?
 
@@ -122,7 +131,12 @@ struct ParticleCanvasView: View {
 }
 {% endhighlight %}
 
-[TODO video]
+<center>
+<video autoplay="" muted="" loop="" controls="controls" width="400">
+	<source src="/assets/posts/16_video_02.mov">
+	<source src="/assets/posts/16_video_02.webm" type="video/webm">
+</video>
+</center>
 
 please note the position computation was moved to a separate function so the Canvas content remains clean.
 
@@ -139,7 +153,12 @@ for i in 0..<particleCount {
 }
 {% endhighlight %}
 
-[TODO video]
+<center>
+<video autoplay="" muted="" loop="" controls="controls" width="400">
+	<source src="/assets/posts/16_video_03.mov">
+	<source src="/assets/posts/16_video_03.webm" type="video/webm">
+</video>
+</center>
 
 ## Randomize
 
@@ -173,7 +192,12 @@ struct ParticleCanvasView: View {
     }
 {% endhighlight %}
 
-[TODO video]
+<center>
+<video autoplay="" muted="" loop="" controls="controls" width="400">
+	<source src="/assets/posts/16_video_04.mov">
+	<source src="/assets/posts/16_video_04.webm" type="video/webm">
+</video>
+</center>
 
 ## Improving the effect appearance
 
@@ -198,7 +222,13 @@ struct SingleParticleView: View {
 {% endhighlight %}
 We make particles here as a nice big blurry spots, that blends together to form nice fire volume. The blendMode(.plusLighter) combines overlapping orange dots, effectively brightening the result where the patrticles intersect.
 
-[TODO video]
+<center>
+<video autoplay="" muted="" loop="" controls="controls" width="400">
+	<source src="/assets/posts/16_video_07.mov">
+	<source src="/assets/posts/16_video_07.webm" type="video/webm">
+</video>
+</center>
+
 
 ## “Art“ time
 
@@ -255,14 +285,33 @@ struct ParticleCanvasView: View {
 }
 {% endhighlight %}
 
-[TODO video]
+<center>
+<video autoplay="" muted="" loop="" controls="controls" width="400">
+	<source src="/assets/posts/16_video_05.mov">
+	<source src="/assets/posts/16_video_05.webm" type="video/webm">
+</video>
+</center>
 
 And one more, even more polished example to motivate YOU to come up with something nice.
 
-[TODO video]
+
+<center>
+<video autoplay="" muted="" loop="" controls="controls" width="400">
+	<source src="/assets/posts/16_video_06.mov">
+	<source src="/assets/posts/16_video_06.webm" type="video/webm">
+</video>
+</center>
+
+
 ## Your turn!
 
 Now it is your time to get creative! 
+
+Things to try
+ - change particle size during the movement
+ - change particle movement paths
+ - react to user inputs
+ - 💫 ...
 
 Let me know, if you find this article helpful, and send me your animations on [Twitter].
 
@@ -271,9 +320,4 @@ Let me know, if you find this article helpful, and send me your animations on [T
 [Canvas]: https://developer.apple.com/documentation/swiftui/canvas/
 [Twitter]: https://twitter.com/myridiphis
 
-[image1]: /assets/posts/15_01.png "Main view"
-[image2]: /assets/posts/15_02.png "Transposed view"
-[image3]: /assets/posts/15_03.png "Flag effect"
-[image4]: /assets/posts/15_04.png "Flag effect"
-
-[video1]: /assets/posts/15_01.png "Transition effect"
+[image1]: /assets/posts/16_01.png "Static particle"
