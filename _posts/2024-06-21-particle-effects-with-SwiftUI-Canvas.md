@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Magical Particle Effects with SwiftUI Canvas"
-date: 2024-06-21
+date: 2024-06-27
 author: Pavel Zak
 categories: development
 tags:	SwiftUI Canvas Particles BlendMode TimelineView
@@ -11,7 +11,7 @@ In one of the previous posts, I shared a simple way of [Creating particle effect
 
 In this post, I will introduce you to an **alternate and better** approach - rendering the particles with the `Canvas` view. So let's get into it 💪.
 
-## Setup
+## Setup 
 
 We will start with the following view outline:
 
