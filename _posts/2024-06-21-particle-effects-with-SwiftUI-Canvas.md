@@ -220,7 +220,7 @@ struct SingleParticleView: View {
     }
 }
 {% endhighlight %}
-We make particles here as a nice big blurry spots, that blends together to form nice fire volume. The blendMode(.plusLighter) combines overlapping orange dots, effectively brightening the result where the patrticles intersect.
+We make particles here as a nice big blurry spots, that blends together to form a fire volume. The blendMode(.plusLighter) combines overlapping orange dots, effectively brightening the result where the patrticles intersect.
 
 <center>
 <video autoplay="" muted="" loop="" controls="controls" width="400">
@@ -230,11 +230,17 @@ We make particles here as a nice big blurry spots, that blends together to form 
 </center>
 
 
-## “Art“ time
+At this point, I am still not very happy with the result and will need to introduce more tweaks. This is very typical in such a creative process that your initial idea is not exactly aligned with the implementation and you are required to iterate on it.
 
-From the theory point of view, I have presented here all the typical steps I go through when creating similar effects. The final step is to experiment with the code, fine-tune the variables, and change or even add more parameters to reach the expected liking,
+The thing that bothers me is that the particles are more dense at the top of the view, while I would prefer otherwise. To fix that, let me get rid of the even y-axis distribution and adjust the y-coordinate like this:
 
-The final effect I was happy with is:
+{% highlight swift %}
+let y = (1-time*time)*canvasSize.height
+{% endhighlight %}
+
+Also, I would like to boost the particle vanishing effect so let me decrease the particle opacity with time.
+
+The final effect I am happy with is:
 
 {% highlight swift %}
 struct ParticleCanvasView: View {
@@ -292,8 +298,21 @@ struct ParticleCanvasView: View {
 </video>
 </center>
 
-And one more, even more polished example to motivate YOU to come up with something nice.
 
+
+
+## Your turn!
+
+Now it is your time to get creative! 
+
+Things to try
+ - change particle appearance
+ - change particle movement paths
+ - combine multiple particle types
+ - react to user inputs
+ - 💫 ...
+
+Here is a result of more experiments and adjustments:
 
 <center>
 <video autoplay="" muted="" loop="" controls="controls" width="400">
@@ -302,18 +321,7 @@ And one more, even more polished example to motivate YOU to come up with somethi
 </video>
 </center>
 
-
-## Your turn!
-
-Now it is your time to get creative! 
-
-Things to try
- - change particle size during the movement
- - change particle movement paths
- - react to user inputs
- - 💫 ...
-
-Let me know, if you find this article helpful, and send me your animations on [Twitter].
+Enjoy! And let me know, if you find this article helpful, and send me your animations on [Twitter].
 
 
 [TimelineView]: https://developer.apple.com/documentation/swiftui/timelineview

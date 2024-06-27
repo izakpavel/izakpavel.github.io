@@ -11,7 +11,7 @@ tags:	SwiftUI Particle ViewModifier
 I have put together a short video about creating particle effects with SwiftUI. It showcases the easiest/lazy way, which is great for simple eye candies and experimenting.
 
 Please note, that it is not the most performant way how to deal with particle effects in SwiftUI. If you need to go crazy about blending and high particle count, there are better ways:
-- using canvas view
+- using the Canvas view (see [Magical Particle Effects with SwiftUI Canvas]({% link _posts/2024-06-21-particle-effects-with-SwiftUI-Canvas.md %})
 - embed SpriteKit view
 - using MetalKit
 But more on these another time ;)
